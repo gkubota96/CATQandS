@@ -1,0 +1,21 @@
+# SporeData RedCAP CAT API
+
+The CAT API uses mirt and mirtCAT for IRT parameter estimation, plumber for simple API development and Redis for in-memory and persistent data storage.
+
+
+
+1. Change PROMIS URL in RedCap MySQL:
+UPDATE redcap_config SET value = 'http://127.0.0.1:5234/' WHERE field_name = 'promis_api_base_url';
+Original API: https://www.redcap-cats.org/promis_api/
+Change the user permissions:
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, DROP ON redcap.* TO redcap@'%' IDENTIFIED BY '#####';
+This will cease any RedCAP communication to PROMIS.
+
+
+2. Install Redis in the system (and the package Redux).
+
+
+3. Load the dictionaries running load_data.R, each dictionary must be configured inside the file.
+
+
+4. Configure pm2 (or other process manager) to run_api.R
